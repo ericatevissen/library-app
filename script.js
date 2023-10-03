@@ -42,30 +42,31 @@ submitButton.textContent = "submit";
 form.appendChild(ul);
 form.appendChild(submitButton);
 
-const scriptElement = document.querySelector("script");
+const booksDiv = document.querySelector(".books");
 const books = [];
 
-//appends the form to the DOM, generates a book from the inputs when it's submitted,
-//adds it to the DOM and stores it in an array.
+//appends the form to the DOM
 function createBook() {
-    document.body.insertBefore(form, scriptElement);
-
-    document.querySelector("form").addEventListener("submit", (e) => {
-        e.preventDefault();
-    
-        const titleInput = document.getElementById('title').value;
-        const authorInput = document.getElementById('author').value;
-        const pagesInput = document.getElementById('pages').value;
-        const readInput = document.getElementById('read').checked;
-    
-        const book = new Book(titleInput, authorInput, pagesInput, readInput);
-
-        form.remove()
-
-        appendBook(book);
-        books.push(book);
-    });
+    document.body.insertBefore(form, booksDiv);
 }
+
+//Generates a book from the inputs when it's submitted,
+//adds it to the DOM and stores it in an array.
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const titleInput = document.getElementById('title').value;
+    const authorInput = document.getElementById('author').value;
+    const pagesInput = document.getElementById('pages').value;
+    const readInput = document.getElementById('read').checked;
+
+    const book = new Book(titleInput, authorInput, pagesInput, readInput);
+
+    form.remove();
+
+    appendBook(book);
+    books.push(book);
+});
 
 function appendBook(key) {
     const bookDiv = document.createElement("p");
@@ -95,7 +96,7 @@ function appendBook(key) {
     bookDiv.appendChild(readButton);
     bookDiv.appendChild(removeButton);
 
-    document.body.insertBefore(bookDiv, scriptElement);
+    booksDiv.appendChild(bookDiv);
 }
 
 createBook()

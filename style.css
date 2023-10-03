@@ -11,8 +11,14 @@ body {
 }
 
 h1 {
-    padding: 2vw;
+    padding: 2vmax;
     font-size: clamp(30px, 2.4vw, 300px);;
+}
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vmax;
 }
 
 .book {
@@ -20,9 +26,9 @@ h1 {
     flex-direction: column;
     align-items: center;
     width: 15vw;
-    padding: 1vw;
-    border-radius: 1vw;
-    gap: 1vw;
+    padding: 1vmax;
+    border-radius: 1vmax;
+    gap: 1vmax;
     background-color: white;
     box-shadow: 0px 0px 5px 1px rgba(77,77,77,1);
 }
@@ -34,10 +40,10 @@ h1 {
 
 .book button {
     width: 90%;
-    height: 3vw;
+    height: 3vmax;
     background-color: rgb(252, 154, 43);
     border: none;
-    border-radius: 0.5vw;
+    border-radius: 0.5vmax;
 }
 
 .book button:not(:last-child) {
@@ -52,7 +58,8 @@ button:hover {
 form {
     display: flex;
     flex-direction: column;
-    gap: 1vw;
+    gap: 1vmax;
+    margin-bottom: 2vmax;
 }
 
 ul {
