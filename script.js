@@ -12,32 +12,37 @@ const form = document.createElement("form");
 const ul = document.createElement("ul");
 
 const formFields = [
-    { label: "title", type: "text", name: "title", id: "title" },
-    { label: "author", type: "text", name: "author", id: "author" },
-    { label: "pages", type: "number", name: "pages", id: "pages" },
-    { label: "read", type: "checkbox", name: "read", id: "read", value: "read" },
+    { type: "text", name: "title", id: "title", placeholder: "Title", autocomplete: "off" },
+    { type: "text", name: "author", id: "author", placeholder: "Author", autocomplete: "off" },
+    { type: "number", name: "pages", id: "pages", placeholder: "Pages", autocomplete: "off" },
+    { type: "checkbox", name: "read", id: "read" },
 ];
 
 formFields.forEach((field) => {
     const li = document.createElement("li");
-    const label = document.createElement("label");
-    label.setAttribute("for", field.id);
-    label.textContent = field.label;
     const input = document.createElement("input");
     input.setAttribute("type", field.type);
     input.setAttribute("name", field.name);
     input.setAttribute("id", field.id);
+    
     if (field.type === "checkbox") {
-        input.setAttribute("value", field.value);
+        const label = document.createElement("label");
+        label.setAttribute("for", field.id);
+        label.textContent = "Have you read it?";
+        li.appendChild(label);
     }
-    li.appendChild(label);
+    else {
+        input.setAttribute("placeholder", field.placeholder);
+        input.setAttribute("autocomplete", field.autocomplete || "on");
+    }
+    
     li.appendChild(input);
     ul.appendChild(li);
 });
 
 const submitButton = document.createElement("button");
 submitButton.setAttribute("type", "submit");
-submitButton.textContent = "submit";
+submitButton.textContent = "Submit";
 
 form.appendChild(ul);
 form.appendChild(submitButton);
@@ -48,6 +53,11 @@ const books = [];
 //appends the form to the DOM
 function createBook() {
     document.body.insertBefore(form, booksDiv);
+
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('pages').value = '';
+    document.getElementById('read').checked = false;
 }
 
 //Generates a book from the inputs when it's submitted,
@@ -68,6 +78,7 @@ form.addEventListener("submit", (e) => {
     books.push(book);
 });
 
+//Adds the book to the DOM
 function appendBook(key) {
     const bookDiv = document.createElement("p");
     const titleParagraph = document.createElement("p");
@@ -87,7 +98,7 @@ function appendBook(key) {
     }
     else {
         readButton.textContent = "Not read"
-        readButton.style.backgroundColor = "red";
+        readButton.style.backgroundColor = "#dc2626";
     }
 
     bookDiv.appendChild(titleParagraph);

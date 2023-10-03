@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: inherit;
 }
 
 body {
@@ -12,7 +13,7 @@ body {
 
 h1 {
     padding: 2vmax;
-    font-size: clamp(30px, 2.4vw, 300px);;
+    font-size: clamp(30px, 2.4vw, 300px);
 }
 
 .books {
@@ -33,9 +34,8 @@ h1 {
     box-shadow: 0px 0px 5px 1px rgba(77,77,77,1);
 }
 
-.book p, button {
+.book p, .book button {
     font-size: clamp(20px, 1.6vw, 200px);
-    font-family: inherit;
 }
 
 .book button {
@@ -58,16 +58,46 @@ button:hover {
 form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding: 2vmax;
     gap: 1vmax;
     margin-bottom: 2vmax;
+    background-color: white;
+    box-shadow: 0px 0px 5px 1px rgba(77,77,77,1);
+    border-radius: 1vmax;
+}
+
+form input {
+    width: 24vmax;
+    height: 2.5vmax;
+    font-size: inherit;
+}
+
+form button {
+    font-size: clamp(30px, 2.4vw, 300px);
+    width: 18vmax;
+    height: 4vmax;
+    border: none;
+    border-radius: 1vmax;
+    background-color: #70e69b;
+}
+
+#read {
+    width: 3vmax;
+    height: 3vmax;
 }
 
 ul {
     display: flex;
     flex-direction: column;
-    gap: 0.5vw;
+    gap: 1vmax;
+    align-items: center;
 }
 
 li {
+    display: flex;
+    align-items: center;
+    gap: 0.5vmax;
     list-style: none;
+    font-size: clamp(25px, 2vw, 250px);
 }
