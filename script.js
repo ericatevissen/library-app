@@ -7,7 +7,7 @@ class Book {
     }
 }
 
-//Generates a form
+//creates a form to input the book's info
 const form = document.createElement("form");
 const ul = document.createElement("ul");
 
@@ -45,8 +45,9 @@ form.appendChild(submitButton);
 const scriptElement = document.querySelector("script");
 const books = [];
 
-//appends the form to the DOM and generates a new book from the inputs when it's submitted
-function addBook() {
+//appends the form to the DOM, generates a book from the inputs when it's submitted,
+//adds it to the DOM and stores it in an array.
+function createBook() {
     document.body.insertBefore(form, scriptElement);
 
     document.querySelector("form").addEventListener("submit", (e) => {
@@ -58,6 +59,43 @@ function addBook() {
         const readInput = document.getElementById('read').checked;
     
         const book = new Book(titleInput, authorInput, pagesInput, readInput);
+
+        form.remove()
+
+        appendBook(book);
         books.push(book);
     });
 }
+
+function appendBook(key) {
+    const bookDiv = document.createElement("p");
+    const titleParagraph = document.createElement("p");
+    const authorParagraph = document.createElement("p");
+    const pagesParagraph = document.createElement("p");
+    const readButton = document.createElement("button");
+    const removeButton = document.createElement("button");
+
+    bookDiv.className = "book"
+    titleParagraph.textContent = `${key.title}`;
+    authorParagraph.textContent = `${key.author}`
+    pagesParagraph.textContent = `${key.pages} pages`
+    removeButton.textContent = "Remove"
+
+    if (key.read === true) {
+        readButton.textContent = "Read"
+    }
+    else {
+        readButton.textContent = "Not read"
+        readButton.style.backgroundColor = "red";
+    }
+
+    bookDiv.appendChild(titleParagraph);
+    bookDiv.appendChild(authorParagraph);
+    bookDiv.appendChild(pagesParagraph);
+    bookDiv.appendChild(readButton);
+    bookDiv.appendChild(removeButton);
+
+    document.body.insertBefore(bookDiv, scriptElement);
+}
+
+createBook()
