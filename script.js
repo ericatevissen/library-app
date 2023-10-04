@@ -9,42 +9,47 @@ class Book {
 
 //creates a form to input the book's info
 const form = document.createElement("form");
-const ul = document.createElement("ul");
 
 const formFields = [
-    { type: "text", name: "title", id: "title", placeholder: "Title", autocomplete: "off" },
-    { type: "text", name: "author", id: "author", placeholder: "Author", autocomplete: "off" },
-    { type: "number", name: "pages", id: "pages", placeholder: "Pages", autocomplete: "off" },
+    { type: "text", name: "title", id: "title", placeholder: "Title", autocomplete: "off", required: true },
+    { type: "text", name: "author", id: "author", placeholder: "Author", autocomplete: "off", required: true },
+    { type: "number", name: "pages", id: "pages", placeholder: "Pages", autocomplete: "off", required: true },
     { type: "checkbox", name: "read", id: "read" },
 ];
 
 formFields.forEach((field) => {
-    const li = document.createElement("li");
-    const input = document.createElement("input");
-    input.setAttribute("type", field.type);
-    input.setAttribute("name", field.name);
-    input.setAttribute("id", field.id);
-    
     if (field.type === "checkbox") {
+        const div = document.createElement("div");
+
         const label = document.createElement("label");
         label.setAttribute("for", field.id);
         label.textContent = "Have you read it?";
-        li.appendChild(label);
+
+        const input = document.createElement("input");
+        input.setAttribute("type", field.type);
+        input.setAttribute("name", field.name);
+        input.setAttribute("id", field.id);
+
+        div.appendChild(label);
+        div.appendChild(input);
+        form.appendChild(div);
     }
     else {
+        const input = document.createElement("input");
+        input.setAttribute("type", field.type);
+        input.setAttribute("name", field.name);
+        input.setAttribute("id", field.id);
         input.setAttribute("placeholder", field.placeholder);
         input.setAttribute("autocomplete", field.autocomplete || "on");
+        input.setAttribute("required", field.required || false);
+        form.appendChild(input);
     }
-    
-    li.appendChild(input);
-    ul.appendChild(li);
 });
 
 const submitButton = document.createElement("button");
 submitButton.setAttribute("type", "submit");
 submitButton.textContent = "Submit";
 
-form.appendChild(ul);
 form.appendChild(submitButton);
 
 const booksDiv = document.querySelector(".books");
@@ -110,4 +115,7 @@ function appendBook(key) {
     booksDiv.appendChild(bookDiv);
 }
 
-createBook()
+const addBookButton = document.querySelector(".add-book-button")
+addBookButton.addEventListener("click", () => {
+    createBook();
+});

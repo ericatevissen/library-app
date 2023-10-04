@@ -16,18 +16,30 @@ h1 {
     font-size: clamp(30px, 2.4vw, 300px);
 }
 
+.add-book-button {
+    padding: 2vmax;
+    padding-top: 1vmax;
+    padding-bottom: 1vmax;
+    background-color: #f87171;
+    border: none;
+    border-radius: 1vmax;
+    font-size: clamp(25px, 2vw, 250px);
+    margin-bottom: 2vmax;
+}
+
 .books {
     display: flex;
     flex-wrap: wrap;
     gap: 2vmax;
+    justify-content: center;
 }
 
 .book {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 15vw;
-    padding: 1vmax;
+    width: 25vw;
+    padding: 2vmax;
     border-radius: 1vmax;
     gap: 1vmax;
     background-color: white;
@@ -40,7 +52,8 @@ h1 {
 
 .book button {
     width: 90%;
-    height: 3vmax;
+    padding-top: 1vmax;
+    padding-bottom: 1vmax;
     background-color: rgb(252, 154, 43);
     border: none;
     border-radius: 0.5vmax;
@@ -60,23 +73,25 @@ form {
     flex-direction: column;
     align-items: center;
     padding: 2vmax;
+    width: 30vw;
     gap: 1vmax;
     margin-bottom: 2vmax;
     background-color: white;
     box-shadow: 0px 0px 5px 1px rgba(77,77,77,1);
     border-radius: 1vmax;
+    font-size: clamp(25px, 2vw, 250px);
 }
 
 form input {
-    width: 24vmax;
-    height: 2.5vmax;
+    width: 90%;
     font-size: inherit;
 }
 
 form button {
     font-size: clamp(30px, 2.4vw, 300px);
-    width: 18vmax;
-    height: 4vmax;
+    width: 75%;
+    padding-top: 0.8vmax;
+    padding-bottom: 0.8vmax;
     border: none;
     border-radius: 1vmax;
     background-color: #70e69b;
@@ -87,17 +102,18 @@ form button {
     height: 3vmax;
 }
 
-ul {
-    display: flex;
-    flex-direction: column;
-    gap: 1vmax;
-    align-items: center;
-}
-
-li {
+form div {
     display: flex;
     align-items: center;
     gap: 0.5vmax;
     list-style: none;
-    font-size: clamp(25px, 2vw, 250px);
+}
+
+@media (max-width: 500px){
+    .book {
+        width: 80vw;
+    }
+    form {
+        width: 80vw;
+    }
 }
