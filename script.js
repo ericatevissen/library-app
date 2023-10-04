@@ -1,5 +1,6 @@
 class Book {
     constructor (title, author, pages, read) {
+        this.id = Math.random();
         this.title = title;
         this.author = author;
         this.pages = pages;
@@ -53,7 +54,7 @@ submitButton.textContent = "Submit";
 form.appendChild(submitButton);
 
 const booksDiv = document.querySelector(".books");
-const books = [];
+let books = [];
 
 //appends the form to the DOM
 function createBook() {
@@ -66,7 +67,7 @@ function createBook() {
 }
 
 //Generates a book from the inputs when it's submitted,
-//adds it to the DOM and stores it in an array.
+//adds it to the DOM and stores it in the array
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -84,25 +85,46 @@ form.addEventListener("submit", (e) => {
 });
 
 //Adds the book to the DOM
-function appendBook(key) {
-    const bookDiv = document.createElement("p");
+function appendBook(book) {
+    const bookDiv = document.createElement("div");
     const titleParagraph = document.createElement("p");
     const authorParagraph = document.createElement("p");
     const pagesParagraph = document.createElement("p");
     const readButton = document.createElement("button");
     const removeButton = document.createElement("button");
 
-    bookDiv.className = "book"
-    titleParagraph.textContent = `${key.title}`;
-    authorParagraph.textContent = `${key.author}`
-    pagesParagraph.textContent = `${key.pages} pages`
-    removeButton.textContent = "Remove"
+    removeButton.addEventListener("click", (e) => {
+        const targetBook = e.target.parentNode;
+        modifyBook(targetBook.id, "remove");
+        targetBook.remove();
+    });
 
-    if (key.read === true) {
-        readButton.textContent = "Read"
+    readButton.addEventListener("click", (e) => {
+        const targetBook = e.target.parentNode;
+        modifyBook(targetBook.id, "update");
+
+        if (book.read === true) {
+            readButton.innerText = "Not read";
+            readButton.style.backgroundColor = "rgb(251, 47, 81)";
+        } 
+        else {
+            readButton.innerText = "Read";
+            readButton.style.backgroundColor = "#70e69b";
+        }
+    });
+
+    bookDiv.className = "book";
+    bookDiv.id = book.id;
+    titleParagraph.textContent = book.title;
+    authorParagraph.textContent = book.author;
+    pagesParagraph.textContent = `${book.pages} pages`;
+    removeButton.textContent = "Remove";
+
+    if (book.read === true) {
+        readButton.textContent = "Read";
     }
     else {
-        readButton.textContent = "Not read"
+        readButton.textContent = "Not read";
         readButton.style.backgroundColor = "rgb(251, 47, 81)";
     }
 
@@ -119,3 +141,17 @@ const addBookButton = document.querySelector(".add-book-button")
 addBookButton.addEventListener("click", () => {
     createBook();
 });
+
+//finds a book on the array by its id, and removes it or updates its read status
+function modifyBook(id, order) {
+    books.forEach(book => {
+        if (Number(id) === book.id) {
+            if (order === "remove") {
+                books = books.filter(item => item !== book);
+            }
+            else if (order === "update") {
+                book.read === true ? book.read = false : book.read = true;
+            }
+        }
+    });
+}

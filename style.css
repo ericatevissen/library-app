@@ -13,7 +13,7 @@ body {
 
 h1 {
     padding: 2vmax;
-    font-size: clamp(30px, 2.4vw, 300px);
+    font-size: clamp(50px, 4vw, 500px);
 }
 
 .add-book-button {
@@ -46,17 +46,22 @@ h1 {
     box-shadow: 0px 0px 5px 1px rgba(77,77,77,1);
 }
 
+.book p {
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
 .book p, .book button {
     font-size: clamp(20px, 1.6vw, 200px);
 }
 
 .book button {
-    width: 90%;
+    width: 80%;
     padding-top: 1vmax;
     padding-bottom: 1vmax;
     background-color: rgb(252, 154, 43);
     border: none;
-    border-radius: 0.5vmax;
+    border-radius: 0.8vmax;
 }
 
 .book button:not(:last-child) {
@@ -98,8 +103,8 @@ form button {
 }
 
 #read {
-    width: 3vmax;
-    height: 3vmax;
+    width: max(5vh, 3vw);
+    height: max(5vh, 3vw);
 }
 
 form div {
