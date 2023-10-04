@@ -103,7 +103,7 @@ function appendBook(key) {
     }
     else {
         readButton.textContent = "Not read"
-        readButton.style.backgroundColor = "#dc2626";
+        readButton.style.backgroundColor = "rgb(251, 47, 81)";
     }
 
     bookDiv.appendChild(titleParagraph);
