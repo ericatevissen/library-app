@@ -100,9 +100,6 @@ function appendBook(book) {
     });
 
     readButton.addEventListener("click", (e) => {
-        const targetBook = e.target.parentNode;
-        modifyBook(targetBook.id, "update");
-
         if (book.read === true) {
             readButton.innerText = "Not read";
             readButton.style.backgroundColor = "rgb(251, 47, 81)";
@@ -111,6 +108,9 @@ function appendBook(book) {
             readButton.innerText = "Read";
             readButton.style.backgroundColor = "#70e69b";
         }
+
+        const targetBook = e.target.parentNode;
+        modifyBook(targetBook.id, "update");
     });
 
     bookDiv.className = "book";
