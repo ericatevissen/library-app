@@ -28,9 +28,9 @@ function App() {
     setShowForm(true);
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
-    
+
     const book = {
       name: title.valueOf(),
       author: author.valueOf(),
