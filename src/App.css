@@ -5,10 +5,13 @@
 }
 
 body {
+    background-color: #d3d1d4;
+}
+
+#root {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #d3d1d4;
 }
 
 h1 {
