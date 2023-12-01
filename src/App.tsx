@@ -17,12 +17,23 @@ type BookFormProps = {
   setPages: React.Dispatch<React.SetStateAction<string>>
 }
 
+type booksprop = {
+  books: Array<book>;
+}
+
+type book = {
+  title: string;
+  author: string;
+  pages: number;
+  id: number;
+}
+
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [pages, setPages] = useState("");
-  const books = [];
+  const [books, setBooks] = useState<Array<book>>([]);
 
   function handleAddBook() {
     setShowForm(true);
@@ -31,13 +42,22 @@ function App() {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
 
-    const book = {
-      name: title.valueOf(),
+    setShowForm(false);
+
+    const newBook : book = {
+      title: title.valueOf(),
       author: author.valueOf(),
-      pages: Number(pages.valueOf())
+      pages: Number(pages.valueOf()),
+      id: Math.random()
     }
 
-    books.push(book)
+    setTitle("")
+    setAuthor("")
+    setPages("")
+
+    const currentBooks = [...books]
+    const updatedBooks = [...currentBooks, newBook]
+    setBooks(updatedBooks)
   }
 
   return (
@@ -46,7 +66,7 @@ function App() {
       <AddBook handleAddBook={handleAddBook}/>
       <BookForm showForm={showForm} handleSubmit={handleSubmit} title={title} author={author}
         pages={pages} setTitle={setTitle} setAuthor={setAuthor} setPages={setPages}/>
-      <div className="books"></div>
+      <Books books={books}/>
     </>
   );
 }
@@ -77,8 +97,25 @@ function BookForm({ showForm, handleSubmit, title, author, pages, setTitle, setA
         <input type="checkbox" name="read" id="read" />
       </div>
       <button type="submit">Submit</button>
-      <p>{title}</p> 
     </form>
+  );
+}
+
+function Books({ books } : booksprop) {
+  return (
+    <div className="books">
+      {books.map(book => {
+        return (
+          <div key={book.id} className="book">
+            <p>{book.title}</p>
+            <p>{book.author}</p>
+            <p>{book.pages}</p>
+            <button></button>
+            <button></button>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
