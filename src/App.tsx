@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 type AddBookProps = {
@@ -19,12 +19,12 @@ type BookFormProps = {
 }
 
 type Booksprop = {
-  books: Array<book>;
+  books: Array<Book>;
   handleReadSwitch: (bookId: number) => void;
   handleDelete: (bookId: number) => void;
 }
 
-type book = {
+type Book = {
   title: string;
   author: string;
   pages: number;
@@ -37,8 +37,19 @@ function App() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [pages, setPages] = useState("");
-  const [books, setBooks] = useState<Array<book>>([]);
-  const [read, setRead] = useState(false)
+  const [books, setBooks] = useState<Array<Book>>([]);
+  const [read, setRead] = useState(false);
+  const retrievedBooksJSON = localStorage.getItem("books");
+  const retrievedBooks = JSON.parse(retrievedBooksJSON || "[]") as Array<Book>;
+  
+  useEffect(() => {
+    setBooks(retrievedBooks);
+  }, []);
+
+  useEffect(() => {
+      const booksJSON = JSON.stringify(books);
+      localStorage.setItem("books", booksJSON);
+  }, [books]);
 
   function handleAddBook() {
     setShowForm(true);
@@ -64,10 +75,10 @@ function App() {
   }  
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
-    e.preventDefault()
+    e.preventDefault();
     setShowForm(false);
 
-    const newBook : book = {
+    const newBook : Book = {
       title: title,
       author: author,
       pages: Number(pages),
@@ -75,19 +86,20 @@ function App() {
       read: read
     }
 
-    setTitle("")
-    setAuthor("")
-    setPages("")
-    setRead(false)
+    setTitle("");
+    setAuthor("");
+    setPages("");
+    setRead(false);
 
-    const currentBooks = [...books]
-    const updatedBooks = [...currentBooks, newBook]
-    setBooks(updatedBooks)
+    const currentBooks = [...books];
+    const updatedBooks = [...currentBooks, newBook];
+
+    setBooks(updatedBooks);
   }
 
   return (
     <>
-      <h1>Library</h1>
+      <h1>{books.length}</h1>
       <AddBook handleAddBook={handleAddBook}/>
       <BookForm showForm={showForm} handleSubmit={handleSubmit} title={title} author={author}
         pages={pages} setTitle={setTitle} setAuthor={setAuthor} setPages={setPages} setRead={setRead} />
@@ -131,7 +143,6 @@ function Books({ books, handleReadSwitch, handleDelete } : Booksprop) {
   return (
     <div className="books">
       {books.map(book => {
-
         return (
           <div key={book.id} className="book">
             <p>{book.title}</p>
