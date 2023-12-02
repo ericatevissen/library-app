@@ -1,8 +1,3 @@
 # Library App
 
-A react.ts remake of an old vanilla js project
-
-## Future Updates
-
--Adding local storage
--Some UI improvements
+A react + typescript remake of an old vanilla js project, it stores the books the user inputs in local storage.
