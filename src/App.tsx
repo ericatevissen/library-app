@@ -21,6 +21,7 @@ type BookFormProps = {
 type Booksprop = {
   books: Array<book>;
   handleReadSwitch: (bookId: number) => void;
+  handleDelete: (bookId: number) => void;
 }
 
 type book = {
@@ -57,6 +58,11 @@ function App() {
     setBooks(updatedBooks);
   }
 
+  function handleDelete(bookId: number) {
+    const updatedBooks = books.filter(book => book.id !== bookId);
+    setBooks(updatedBooks);
+  }  
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
     setShowForm(false);
@@ -85,7 +91,7 @@ function App() {
       <AddBook handleAddBook={handleAddBook}/>
       <BookForm showForm={showForm} handleSubmit={handleSubmit} title={title} author={author}
         pages={pages} setTitle={setTitle} setAuthor={setAuthor} setPages={setPages} setRead={setRead} />
-      <Books books={books} handleReadSwitch={handleReadSwitch} />
+      <Books books={books} handleReadSwitch={handleReadSwitch} handleDelete={handleDelete} />
     </>
   );
 }
@@ -121,7 +127,7 @@ setAuthor, setPages, setRead } : BookFormProps) {
   );
 }
 
-function Books({ books, handleReadSwitch } : Booksprop) {
+function Books({ books, handleReadSwitch, handleDelete } : Booksprop) {
   return (
     <div className="books">
       {books.map(book => {
@@ -132,7 +138,7 @@ function Books({ books, handleReadSwitch } : Booksprop) {
             <p>{book.author}</p>
             <p>{book.pages}</p>
             <ReadButton handleReadSwitch={() => handleReadSwitch(book.id)} read={book.read} bookId={book.id}/>
-            <button>Delete</button>
+            <DeleteButton handleDelete={() => handleDelete(book.id)} bookId={book.id}/>
           </div>
         );
       })}
@@ -160,6 +166,15 @@ function ReadButton({ read, handleReadSwitch, bookId } : ReadButtonProps) {
   }
 
   return <button style={{ backgroundColor: readColor }} onClick={() => handleReadSwitch(bookId)}>{readText}</button> 
+}
+
+interface DeleteButtonProps {
+  handleDelete: (bookId: number) => void;
+  bookId: number
+}
+
+function DeleteButton ( {handleDelete, bookId} : DeleteButtonProps ) {
+  return <button onClick={() => handleDelete(bookId)}>Delete</button>
 }
 
 export default App
