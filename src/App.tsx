@@ -99,7 +99,7 @@ function App() {
 
   return (
     <>
-      <h1>{books.length}</h1>
+      <h1>Library</h1>
       <AddBook handleAddBook={handleAddBook}/>
       <BookForm showForm={showForm} handleSubmit={handleSubmit} title={title} author={author}
         pages={pages} setTitle={setTitle} setAuthor={setAuthor} setPages={setPages} setRead={setRead} />
