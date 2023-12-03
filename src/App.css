@@ -16,7 +16,7 @@ body {
 
 h1 {
     padding: 2vmax;
-    font-size: clamp(50px, 4vw, 500px);
+    font-size: clamp(62.5px, 5vw, 625px);
     font-family: 'Tinos';
 }
 
