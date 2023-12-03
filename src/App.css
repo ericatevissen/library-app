@@ -17,7 +17,7 @@ body {
 h1 {
     padding: 2vmax;
     font-size: clamp(50px, 4vw, 500px);
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Tinos';
 }
 
 .add-book-button {
@@ -129,5 +129,14 @@ form div {
     font-style: normal;
     font-weight: 400;
     src: url('./public/ubuntu-v20-latin-regular.woff2') format('woff2');
-  }
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Tinos';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./public/tinos-v24-latin-regular.woff2') format('woff2');
+}
+  
   
