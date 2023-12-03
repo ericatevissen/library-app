@@ -52,7 +52,7 @@ function App() {
   }, [books]);
 
   function handleAddBook() {
-    setShowForm(true);
+    setShowForm(!showForm);
   }
 
   function handleReadSwitch(bookId: number) {
