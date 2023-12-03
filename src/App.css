@@ -36,6 +36,7 @@ h1 {
     flex-wrap: wrap;
     gap: 2vmax;
     justify-content: center;
+    margin-bottom: 1.5vmax;
 }
 
 .book {
